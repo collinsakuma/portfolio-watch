@@ -20,6 +20,7 @@ if __name__ == '__main__':
         WatchedStock.query.delete()
         OwnedStock.query.delete()
         Transaction.query.delete()
+        print("Seeding Finished....")
 
         user_1 = User(
         username="Collin",

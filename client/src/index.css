@@ -1,13 +1,219 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.price {
+  font-size: xx-large;
+  font-weight: bolder;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.price-movement {
+  font-size: 150%;
+  font-weight: bold;
+  margin-top: 13px;
+  margin-right: 1px;
+  margin-left: 5px;
+}
+
+.watchlist-card-button {
+  position:absolute; top:5px; right:2px;
+}
+
+.price-margins {
+  padding-left: 5px;
+}
+
+.holding-total {
+  position:absolute; top:18px; right:18px;
+}
+
+.holding-quantity {
+  position:absolute; top: 18px; right: 200px;
+}
+
+.holding-card-position {
+  text-align: right;
+}
+
+.card-header {
+  font-weight: bold;
+}
+
+.card-border {
+  border-radius: 0;
+}
+
+.ticker-header {
+  font-size: 1.2em;
+}
+
+.articles-link {
+  color: black;
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.articles-link:hover {
+  color: black;
+  font-weight: bolder;
+  text-decoration-line: underline;
+}
+
+.article-text {
+  font-size: 1.15em;
+  margin-top: 10px;
+}
+
+.article-image {
+  width: 350px;
+  height: auto;
+}
+
+
+.table-styles {
+  border-collapse: collapse;
+}
+
+.table-elements {
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgray;
+  padding: 8px;
+  margin-right: auto;
+}
+
+.table-elements-header {
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgray;
+  padding: 8px;
+  text-align: left;
+}
+
+.top-tables {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.news-header {
+  font-size: 2em;
+  justify-content: right;
+  display: flex;
+  width: 25%;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+.gov-trading-link {
+  color: black;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.gov-trading-link:hover {
+  color: black;
+  font-weight: bolder;
+  text-decoration-line: underline;
+}
+
+.gov-trading-text {
+  margin-top: 10px;
+}
+
+.transaction-title {
+  font-size: 2em;
+  text-decoration: underline;
+  font-weight: bold;
+  margin-bottom: 35px;
+}
+
+.add-stocks {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.watchlist-title {
+  font-size: 2em;
+  font-weight: bold;
+  width: 80%;
+  margin: 0 auto;
+  text-align: left;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  text-decoration: underline;
+}
+
+.navbar.active {
+  font-weight: 650;
+}
+
+.navbar {
+  color: black;
+  font-size: 115%;
+  margin-right: 15px;
+}
+
+.navbar-nav .navbar:hover {
+  color: black;
+  font-size: 115%;
+  text-decoration: underline;
+  /* add any other styles you want to apply on hover */
+}
+
+.holdings-title {
+  font-size: 2em;
+  font-weight: bold;
+  width: 60%;
+  margin: 0 auto;
+  text-align: left;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  text-decoration: underline;
+}
+
+.transactions-title {
+  font-size: 2em;
+  font-weight: bold;
+  width: 75%;
+  margin: 0 auto;
+  text-align: left;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  text-decoration: underline;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  background-color: #2169e5;
+}
+/* #52b36c */
+.header-title {
+  font-family: 'News Cycle', sans-serif;
+  color: #fff;
+  font-size: 55px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.ui.button {
+  background-color: #2169e5;
+  color: white;
+
+}
+.ui.button:hover {
+  background-color: #5982ca;
+  color: white;
+}
+
+.ui.button:focus{
+  background-color: #5982ca;
+  color: white;
+}
+
+.marquee-ticker {
+  background-color: #f0f0f0;
+}
+
+.MuiIcon-root {
+  font-size: 300px;
+
 }

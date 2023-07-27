@@ -9,7 +9,7 @@ import Holdings from "./holdings/Holdings";
 import UpdatePortfolio from "./UpdatePortfolio";
 import Transactions from "./Transactions";
 import TickerHeader from "./TickerHeader";
-import SenateTrading from "./gov_trading/governemtTrading";
+import SenateTrading from "./gov_trading/GovernmentTrading";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { userAtom, isMarketOpenAtom } from "../lib/atoms";
 

@@ -10,7 +10,6 @@ function HoldingCard({ holding }) {
     const stockTicker = stock.ticker.toUpperCase();
 
     const [price, setPrice] = useState(0);
-    const [open, setOpen] = useState(0);
     const [change, setChange] = useState(0);
     const [changePercent, setChangePercent] = useState(0);
 
@@ -29,7 +28,6 @@ function HoldingCard({ holding }) {
           const stockData = await getStockQuote();
           // console.log(stockData)
           setPrice(stockData[0].price);
-          setOpen(stockData[0].open);
           setChange(stockData[0].change);
           setChangePercent(stockData[0].changesPercentage);
         } catch(error) {

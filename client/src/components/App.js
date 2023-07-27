@@ -42,7 +42,7 @@ function App() {
     return () => {
       clearTimeout(timeoutId);
     }
-  },[])
+  },[setIsMarketOpen])
 
 
   useEffect(() => {

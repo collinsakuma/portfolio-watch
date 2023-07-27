@@ -1,4 +1,3 @@
-import { useState} from "react";
 import { useFormik } from "formik";
 import { Form, Button } from 'semantic-ui-react';
 import * as yup from 'yup';
@@ -7,7 +6,6 @@ import { userAtom } from '../lib/atoms';
 import { useHistory } from "react-router-dom";
 
 function SignUpForm() {
-    const [popupAlert, setPopupAlert] = useState(false);
     const setUser = useSetRecoilState(userAtom);
     const history = useHistory();
 

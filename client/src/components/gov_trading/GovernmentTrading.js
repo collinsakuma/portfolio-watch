@@ -28,7 +28,6 @@ function GovernmentTrading() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(20);
     const [rows, setRows] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
 
 
     const handleChangePage = (event, newPage) => {
@@ -57,7 +56,6 @@ function GovernmentTrading() {
                 );
             })
             setRows(newRows);
-            setIsLoading(false);
         })
     },[])
     
@@ -65,7 +63,7 @@ function GovernmentTrading() {
         <div style={{display:"flex", justifyContent:"center"}}>
             <div style={{width:"75%"}}>
                 <div style={{width:"50%", marginTop:"50px", marginBottom:"50px"}}>
-                    <a className='gov-trading-link' href="https://www.congress.gov/112/plaws/publ105/PLAW-112publ105.htm" target="_blank">The Stop Trading on Congressional Knowledge Act (Stock Act)</a>
+                    <a className='gov-trading-link' href="https://www.congress.gov/112/plaws/publ105/PLAW-112publ105.htm" target="_blank" rel="noreferrer">The Stop Trading on Congressional Knowledge Act (Stock Act)</a>
                     <p className='gov-trading-text'>Represenatives must report transactions over $1000 involving stocks, bonds, and commodities to
                         the Ethics Office on an ongoing basis. Transactions must be reported within 45 days of execution. <strong>Bellow is a collection of recent dislosures by members of congress.</strong></p>
                 </div>

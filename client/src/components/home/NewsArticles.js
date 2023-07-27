@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import NewsArticleCard from './NewsArticleCard';
 import { Card } from 'semantic-ui-react';
 import { newsArticlesAtom, userStocksAtom } from '../../lib/atoms';
@@ -11,16 +11,23 @@ function NewsArticles() {
     const [userStocks, setUserStocks] = useRecoilState(userStocksAtom);
     
     useEffect(() => {
-        fetch('/stocks_by_user_id')
-        .then((r) => r.json())
+      fetch('/stocks_by_user_id')
         .then((r) => {
-            let array = [];
-            r.map((holding) => {
-                array.push(holding.stock.ticker.toUpperCase());
-            })
-            setUserStocks(array.toString());
+          if (!r.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return r.json();
         })
-    },[])
+        .then((data) => {
+          const tickers = data.map((holding) => holding.stock.ticker.toUpperCase());
+          const tickersString = tickers.join(',');
+          setUserStocks(tickersString);
+        })
+        .catch((error) => {
+          // Handle fetch or parsing errors here
+          console.error('Error fetching data:', error);
+        });
+    }, []);
 
     useEffect(() => {
         fetch(`${API}stock_news?tickers=AAPL,${userStocks}&limit=10&apikey=${process.env.REACT_APP_API_KEY}`)

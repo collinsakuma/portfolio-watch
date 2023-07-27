@@ -9,7 +9,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 const API = "https://financialmodelingprep.com/api/v3/"
-const today = new Date().toISOString().slice(0, 10); // Get today's date in "YYYY-MM-DD" format
 const fiveDaysAgo = new Date();
 fiveDaysAgo.setDate(fiveDaysAgo.getDate() - 5); // Subtract two days from the current date
 const fiveDaysAgoFormatted = fiveDaysAgo.toISOString().slice(0, 10); // Get the date of two days ago in "YYYY-MM-DD" format

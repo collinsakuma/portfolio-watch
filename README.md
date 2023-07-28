@@ -21,3 +21,5 @@ The main use of the Portfolio Watch app is so users can keep track of equity and
 - Apex-charts react library for live stock charts
 - Material Ui for tables
 - Formik and yup for form validations (also bycrypt to encrypt user passwords via hashing)
+
+![Alt Text]([https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif](https://giphy.com/gifs/d3q3xvhl6Rc4PuH2I0/fullscreen)https://giphy.com/gifs/d3q3xvhl6Rc4PuH2I0/fullscreen)

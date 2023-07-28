@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card } from 'semantic-ui-react';
 
 
@@ -14,10 +14,19 @@ function HoldingCard({ holding }) {
     const [changePercent, setChangePercent] = useState(0);
 
     // stock real time price for ticker information
-    async function getStockQuote() {
+    // async function getStockQuote() {
+    //     const response = await fetch(`${API}quote/${stockTicker}?apikey=${process.env.REACT_APP_API_KEY}`);
+    //     return response.json();
+    // }
+
+    const getStockQuote = useCallback(async () => {
+      try {
         const response = await fetch(`${API}quote/${stockTicker}?apikey=${process.env.REACT_APP_API_KEY}`);
         return response.json();
-    }
+      } catch(error) {
+        console.log(error)
+      }
+    },[stockTicker])
 
 
     useEffect(() => {
@@ -40,7 +49,7 @@ function HoldingCard({ holding }) {
       return () => {
         clearTimeout(timeoutId);
       }
-    },[])
+    },[getStockQuote])
 
     return (
       <Card style={{margin: 0, width: "60%"}}>

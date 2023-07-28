@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Button, Card } from 'semantic-ui-react';
 import Chart from 'react-apexcharts';
 import Table from '@mui/material/Table';
@@ -64,16 +64,34 @@ function WatchListCardOpen({ watchedStock, handleRemoveFromWatchList }) {
     ]
 
     // stock one minute price for candle stick chart
-    async function getStockPrice() {
-        const response = await fetch(`${API}historical-chart/1min/${stockTicker}?apikey=${process.env.REACT_APP_API_KEY}&from=${today}`);
-        return response.json();
-    }
+    // async function getStockPrice() {
+    //     const response = await fetch(`${API}historical-chart/1min/${stockTicker}?apikey=${process.env.REACT_APP_API_KEY}&from=${today}`);
+    //     return response.json();
+    // }
+
+    const getStockPrice = useCallback(async () => {
+        try { 
+            const response = await fetch(`${API}historical-chart/1min/${stockTicker}?apikey=${process.env.REACT_APP_API_KEY}&from=${today}`);
+            return response.json();
+        } catch(error) {
+            console.log(error)
+        }
+    },[stockTicker])
 
     // stock real time price for ticker information
-    async function getStockQuote() {
-        const response = await fetch(`${API}quote/${stockTicker}?apikey=${process.env.REACT_APP_API_KEY}`);
-        return response.json();
-    }
+    // async function getStockQuote() {
+    //     const response = await fetch(`${API}quote/${stockTicker}?apikey=${process.env.REACT_APP_API_KEY}`);
+    //     return response.json();
+    // }
+
+    const getStockQuote = useCallback(async () => {
+        try {
+            const response = await fetch(`${API}quote/${stockTicker}?apikey=${process.env.REACT_APP_API_KEY}`);
+            return response.json();
+        } catch(error) {
+            console.log(error)
+        }
+    },[stockTicker])
 
     useEffect(() => {
         let timeoutId;
@@ -101,7 +119,7 @@ function WatchListCardOpen({ watchedStock, handleRemoveFromWatchList }) {
         return () => {
             clearTimeout(timeoutId);
         };
-    }, []);
+    }, [getStockPrice]);
 
     useEffect(() => {
         let timeoutId;
@@ -130,7 +148,7 @@ function WatchListCardOpen({ watchedStock, handleRemoveFromWatchList }) {
         return () => {
         clearTimeout(timeoutId);
         }
-    },[])
+    },[getStockQuote])
     
     return (
         <Card style={{ width: "80%" }}>

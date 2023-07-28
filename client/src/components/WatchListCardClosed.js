@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Button, Card } from 'semantic-ui-react';
 import Chart from 'react-apexcharts';
 import Table from '@mui/material/Table';
@@ -66,10 +66,19 @@ function WatchListCardClosed({ watchedStock, handleRemoveFromWatchList }) {
     ]
 
     // stock one minute price for candle stick chart
-    async function getStockPrice() {
-        const response = await fetch(`${API}historical-chart/5min/${stockTicker}?apikey=${process.env.REACT_APP_API_KEY}&from=${fiveDaysAgoFormatted}`);
-        return response.json();
-    }
+    // async function getStockPrice() {
+    //     const response = await fetch(`${API}historical-chart/5min/${stockTicker}?apikey=${process.env.REACT_APP_API_KEY}&from=${fiveDaysAgoFormatted}`);
+    //     return response.json();
+    // }
+
+    const getStockPrice = useCallback(async () => {
+        try {
+            const response = await fetch(`${API}historical-chart/5min/${stockTicker}?apikey=${process.env.REACT_APP_API_KEY}&from=${fiveDaysAgoFormatted}`);
+            return response.json();
+        } catch(error) {
+            console.log(error)
+        }
+    },[stockTicker])
 
     useEffect(() => {
         async function getChartData() {
@@ -93,7 +102,7 @@ function WatchListCardClosed({ watchedStock, handleRemoveFromWatchList }) {
             }
         }
         getChartData();
-    }, []);
+    }, [getStockPrice]);
 
     useEffect(() => {
         fetch(`${API}quote/${stockTicker}?apikey=${process.env.REACT_APP_API_KEY}`)
@@ -111,7 +120,7 @@ function WatchListCardClosed({ watchedStock, handleRemoveFromWatchList }) {
             setVolume(r[0].volume);
             setAvgVolume(r[0].avgVolume);
         })
-    },[])
+    },[stockTicker])
     
     return (
         <Card style={{ width: "80%" }}>

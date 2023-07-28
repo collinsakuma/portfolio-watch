@@ -27,7 +27,7 @@ function NewsArticles() {
           // Handle fetch or parsing errors here
           console.error('Error fetching data:', error);
         });
-    }, []);
+    }, [setUserStocks]);
 
     useEffect(() => {
         fetch(`${API}stock_news?tickers=AAPL,${userStocks}&limit=10&apikey=${process.env.REACT_APP_API_KEY}`)
@@ -40,7 +40,7 @@ function NewsArticles() {
           .catch((error) => {
             console.error(error);
           });
-      }, [userStocks]);
+      }, [userStocks, setNewsArticles]);
       
       function filterDuplicateArticles(articles) {
         const uniqueTitles = new Set();

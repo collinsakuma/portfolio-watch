@@ -1,5 +1,5 @@
 import { Button, Form, Label } from 'semantic-ui-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { userAtom } from '../lib/atoms';
 import { useRecoilValue } from "recoil";
 
@@ -88,7 +88,7 @@ function UpdatePortfolio() {
                 setStockId(r.id)
             })
         }
-    },[foundStock])
+    },[foundStock, ticker])
 
     const handleAddStock = (e) => {
         e.preventDefault();
@@ -157,12 +157,18 @@ function UpdatePortfolio() {
 
     // Sell Form Code
 
-    const handleTickerSearchSell = (e) => {
+    // const handleTickerSearchSell = (e) => {
+    //     e.preventDefault();
+    //     fetch(`${API}quote/${ticker}?apikey=${process.env.REACT_APP_API_KEY}`)
+    //         .then((r) => r.json())
+    //         .then(setFoundStock)
+    // }
+    const handleTickerSearchSell = useCallback((e) => {
         e.preventDefault();
         fetch(`${API}quote/${ticker}?apikey=${process.env.REACT_APP_API_KEY}`)
             .then((r) => r.json())
             .then(setFoundStock)
-    }
+    },[ticker])
 
     useEffect(() => {
         fetch('/stocks_by_user_id')
@@ -173,7 +179,7 @@ function UpdatePortfolio() {
                     setNumSharesOwned(ownedStock.quantity)
                 }
             })
-    },[handleTickerSearchSell])
+    },[handleTickerSearchSell, stockId])
 
     const handleSetNumSharesToSell = (e) => {
         if (e.target.value <= numSharesOwned && e.target.value >= 0) {

@@ -22,4 +22,4 @@ The main use of the Portfolio Watch app is so users can keep track of equity and
 - Material Ui for tables
 - Formik and yup for form validations (also bycrypt to encrypt user passwords via hashing)
 
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+![Alt Text](https://media.giphy.com/media/KaL0G9adHJaZcjwlA1/giphy.gif)

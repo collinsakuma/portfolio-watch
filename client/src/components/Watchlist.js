@@ -67,7 +67,7 @@ function Watchlist() {
         fetch('/watched_stocks_by_user')
         .then((r) => r.json())
         .then(setWatchedStocksArray)
-    },[])
+    },[setWatchedStocksArray])
 
     const handleRemoveFromWatchList = (watchedStockId) => {
         fetch(`/watched_stocks/${watchedStockId}`, {

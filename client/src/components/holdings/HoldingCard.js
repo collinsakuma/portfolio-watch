@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useRecoilValue } from 'recoil';
+import { isMarketOpenAtom } from '../../lib/atoms';
 import { Card } from 'semantic-ui-react';
 
 
@@ -12,6 +14,7 @@ function HoldingCard({ holding }) {
     const [price, setPrice] = useState(0);
     const [change, setChange] = useState(0);
     const [changePercent, setChangePercent] = useState(0);
+    const isMarketOpen = useRecoilValue(isMarketOpenAtom);
 
     // stock real time price for ticker information
     // async function getStockQuote() {
@@ -42,14 +45,27 @@ function HoldingCard({ holding }) {
         } catch(error) {
           console.log(error);
         }
-        timeoutId = setTimeout(getCurrentPrice, 3000);
       }
-      getCurrentPrice();
 
-      return () => {
+      function isOpen() {
+        getCurrentPrice();
+        timeoutId = setTimeout(isOpen, 3000);
+      }
+    
+      function isClosed() {
         clearTimeout(timeoutId);
       }
-    },[getStockQuote])
+    
+      if (isMarketOpen) {
+        isOpen();
+      } else {
+        isClosed();
+      }
+    
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    },[getStockQuote, isMarketOpen])
 
     return (
       <Card style={{margin: 0, width: "60%"}}>

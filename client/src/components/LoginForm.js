@@ -66,7 +66,7 @@ function LoginForm() {
         <div style={{width:"15%"}}>
             <h2 style={{textAlign:"center", marginTop:"75px"}}>Log In</h2>
             <Form onSubmit={formik.handleSubmit} style={{textAlign:"center"}}>
-                <Button onClick={handleDemoLogin}>Demo</Button>
+                <Button style={{marginBottom:"15px", width:"100px"}} onClick={handleDemoLogin}>Demo</Button>
                 <Form.Field>
                     <Form.Input 
                         name="username"

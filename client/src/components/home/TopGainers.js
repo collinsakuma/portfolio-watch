@@ -25,19 +25,19 @@ function TopGainers() {
           }
         }
       
-        function startTimer() {
+        function isOpen() {
           getTopGainers();
-          timeoutId = setTimeout(startTimer, 30000);
+          timeoutId = setTimeout(isOpen, 30000);
         }
       
-        function stopTimer() {
+        function isClosed() {
           clearTimeout(timeoutId);
         }
       
         if (isMarketOpen) {
-          startTimer();
+          isOpen();
         } else {
-          stopTimer();
+          isClosed();
         }
       
         return () => {

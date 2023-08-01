@@ -54,6 +54,7 @@ function HoldingCard({ holding }) {
     
       function isClosed() {
         clearTimeout(timeoutId);
+        getCurrentPrice();
       }
     
       if (isMarketOpen) {

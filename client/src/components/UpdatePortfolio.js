@@ -112,10 +112,7 @@ function UpdatePortfolio() {
         fetch(`/stocks_by_user_id`)
             .then((r) => r.json())
             .then((r) => {
-                console.log(r, "response")
-                console.log(stockId)
                 let ownedStock = r.find((stock) => stock.stock_id === stockId);
-                console.log(ownedStock,"ownedStocks")
                 if (ownedStock === undefined) {
                     let newOwnedStock = {
                         user_id: user.id,
@@ -132,7 +129,6 @@ function UpdatePortfolio() {
                     })
                 }
                 if (ownedStock !== undefined) {
-                    console.log("run update")
                     let update = {
                         quantity: parseFloat(ownedStock.quantity) + parseFloat(quantity),
                         total_cost: ownedStock.total_cost + (quantity * quote)
@@ -210,10 +206,7 @@ function UpdatePortfolio() {
         .then((r) => r.json())
         .then((r) => {
             let ownedStock = r.find((stock) => stock.stock_id === stockId);
-            console.log("here")
-            console.log(numSharesOwned, numSharesToSell);
             if (numSharesToSell < numSharesOwned) {
-                console.log("update ownedStock")
                 let update = {
                     quantity: parseFloat(ownedStock.quantity) - parseFloat(numSharesToSell),
                     // total_cost: ownedStock.total_cost + (quantity * quote)
@@ -227,7 +220,6 @@ function UpdatePortfolio() {
                 })
             }
             if (numSharesToSell === numSharesOwned) {
-                console.log("delete ownedStock")
                 fetch(`/owned_stocks/${ownedStock.id}`, {
                     method: "DELETE",
                 })

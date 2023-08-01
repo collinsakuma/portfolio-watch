@@ -44,6 +44,7 @@ function TickerHeader() {
           }
         
           function isClosed() {
+            fetchMajorAverages();
             clearTimeout(timeoutId);
           }
         

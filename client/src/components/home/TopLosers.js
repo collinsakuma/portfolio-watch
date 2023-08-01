@@ -33,6 +33,7 @@ function TopLosers() {
           }
         
           function isClosed() {
+            getTopLosers();
             clearTimeout(timeoutId);
           }
         

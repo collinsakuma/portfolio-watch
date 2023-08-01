@@ -1,36 +1,49 @@
 import { useState, useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
+import { isMarketOpenAtom } from '../../lib/atoms';
 
 const API = "https://financialmodelingprep.com/api/v3/"
 
 function TopGainers() {
     const [topFiveGainer, setTopFiveGainer] = useState([]);
+    const isMarketOpen = useRecoilValue(isMarketOpenAtom);
 
     useEffect(() => {
         let timeoutId;
-
+      
         async function getTopGainers() {
-            try {
-                fetch(`${API}stock_market/gainers?limit=10&apikey=${process.env.REACT_APP_API_KEY}`)
-                .then((r) => r.json())
-                .then((r) => {
-                    // console.log(r)
-                    let topFive = [];
-                    for (let i = 5; i < 10; i ++) {
-                        topFive.push(r[i]);
-                    }
-                    setTopFiveGainer(topFive);
-                })
-
-            } catch(error) {
-                console.log(error);
+          try {
+            const response = await fetch(`${API}stock_market/gainers?limit=10&apikey=${process.env.REACT_APP_API_KEY}`);
+            const data = await response.json();
+            const topFive = [];
+            for (let i = 5; i < 10; i++) {
+              topFive.push(data[i]);
             }
-            timeoutId = setTimeout(getTopGainers, 60000);
-        }
-        getTopGainers();
-        return () => {
-            clearTimeout(timeoutId);
+            setTopFiveGainer(topFive);
+          } catch (error) {
+            console.log(error);
           }
-    },[])
+        }
+      
+        function startTimer() {
+          getTopGainers();
+          timeoutId = setTimeout(startTimer, 30000);
+        }
+      
+        function stopTimer() {
+          clearTimeout(timeoutId);
+        }
+      
+        if (isMarketOpen) {
+          startTimer();
+        } else {
+          stopTimer();
+        }
+      
+        return () => {
+          clearTimeout(timeoutId);
+        };
+      }, [isMarketOpen]);
 
     const topFiveTable = topFiveGainer.map((stock) => {
         return (

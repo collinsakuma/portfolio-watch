@@ -36,14 +36,27 @@ function TickerHeader() {
             } catch(error) {
                 console.log(error);
             }
-            timeoutId = setTimeout(fetchMajorAverages, 3000);
         }
-        fetchMajorAverages();
-
-        return () => {
+      
+        function isOpen() {
+            fetchMajorAverages();
+            timeoutId = setTimeout(isOpen, 3000);
+          }
+        
+          function isClosed() {
             clearTimeout(timeoutId);
           }
-    },[])
+        
+          if (isMarketOpen) {
+            isOpen();
+          } else {
+            isClosed();
+          }
+        
+          return () => {
+            clearTimeout(timeoutId);
+          };
+    },[isMarketOpen]);
 
     // return averages with color
     const displayAverage = (averageChange) => {

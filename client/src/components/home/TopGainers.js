@@ -31,6 +31,7 @@ function TopGainers() {
         }
       
         function isClosed() {
+          getTopGainers();
           clearTimeout(timeoutId);
         }
       

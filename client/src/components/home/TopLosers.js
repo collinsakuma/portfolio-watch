@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
+import { isMarketOpenAtom } from '../../lib/atoms';
 
 const API = "https://financialmodelingprep.com/api/v3/"
 
 function TopLosers() {
     const [topFiveLosers, setTopFiveLosers] = useState([]);
+    const isMarketOpen = useRecoilValue(isMarketOpenAtom);
 
     useEffect(() => {
         let timeoutId;
@@ -13,7 +16,6 @@ function TopLosers() {
                 fetch(`${API}stock_market/losers?limit=10&apikey=${process.env.REACT_APP_API_KEY}`)
                 .then((r) => r.json())
                 .then((r) => {
-                    //console.log(r)
                     let topFive = [];
                     for (let i = 5; i < 10; i ++) {
                         topFive.push(r[i]);
@@ -23,13 +25,27 @@ function TopLosers() {
             } catch(error) {
                 console.log(error)
             }
-            timeoutId = setTimeout(getTopLosers, 60000);
         }
-        getTopLosers();
-        return () => {
+      
+        function startTimer() {
+            getTopLosers();
+            timeoutId = setTimeout(startTimer, 30000);
+          }
+        
+          function stopTimer() {
             clearTimeout(timeoutId);
-        }
-    },[])
+          }
+        
+          if (isMarketOpen) {
+            startTimer();
+          } else {
+            stopTimer();
+          }
+        
+          return () => {
+            clearTimeout(timeoutId);
+          };
+    },[isMarketOpen]);
 
     const topFiveTable = topFiveLosers.map((stock) => {
         return (

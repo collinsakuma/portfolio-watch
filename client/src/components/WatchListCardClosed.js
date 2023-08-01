@@ -86,7 +86,7 @@ function WatchListCardClosed({ watchedStock, handleRemoveFromWatchList }) {
                 const chartData = await getStockPrice();
                 // console.log(chartData)
                 let dataPrices = []
-                for (let i = 0; i < 79; i ++) {
+                for (let i = 0; i < 75; i ++) {
                     dataPrices.push(chartData[i])
                 }
                 // console.log(dataPrices)

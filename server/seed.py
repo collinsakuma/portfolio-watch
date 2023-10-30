@@ -33,9 +33,9 @@ if __name__ == '__main__':
         user_2.password_hash = "password"
 
         user_3 = User(
-        username="demo",
+        username="Demo",
         )
-        user_3.password_hash = "password"
+        user_3.password_hash = "154SuP3rS3crEtPa$$word987"
 
         stock1 = Stock(
             ticker="aapl",
